@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  body {
+    color: #595031;
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-table-header {
+    background-color: #A89D6E;
+    color: white;
+  }
+  
+  .order-table th, .order-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .order-table-row {
+    background-color: white;
+  }
+  
+  .order-table-row:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .table-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .header-checkbox, .row-checkbox {
+    cursor: pointer;
+  }
+  
+  .order-table th:nth-child(1), .order-table td:nth-child(1) { width: 5%; } /* Checkbox */
+  .order-table th:nth-child(2), .order-table td:nth-child(2) { width: 25%; } /* Product Name */
+  .order-table th:nth-child(3), .order-table td:nth-child(3) { width: 15%; } /* Quantity */
+  .order-table th:nth-child(4), .order-table td:nth-child(4) { width: 20%; } /* Unit Price */
+  .order-table th:nth-child(5), .order-table td:nth-child(5) { width: 20%; } /* Sub Total */
+  .order-table th:nth-child(6), .order-table td:nth-child(6) { width: 15%; } /* Remove */

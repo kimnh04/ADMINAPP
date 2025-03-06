@@ -1,0 +1,8 @@
+.box-container {
+    width: 70%; /* Hoặc bạn có thể chỉnh kích thước mong muốn */
+    margin: 50px auto; /* Căn giữa */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Drop shadow */
+  }
+  

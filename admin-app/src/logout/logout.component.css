@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.confirmation-dialog {
+  width: 350px;
+  height:168px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Căn giữa theo chiều dọc */
+  align-items: center;  /* Căn giữa theo chiều ngang */
+  min-height: 200px; /* Chiều cao tối thiểu */
+}
+
+.confirmation-dialog h2 {
+  margin-bottom: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #131927;
+}
+
+.confirmation-dialog p {
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 5px;
+  margin-top: 4px;
+  color: #6D717F;
+  font-size: 16px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px; /* Để khoảng cách giữa các nút và nội dung */
+}
+
+.action-button {
+  background-color: #ddd7c0;
+  color: #4b3d2d;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 137px;
+  height: 42px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm drop shadow */
+}
+
+.action-button:hover {
+  background-color: #b1a681;
+  transform: translateY(-2px);
+}
+
+.action-button:focus {
+  outline: none;
+}
+
+.yes-button {
+  background-color: #c4b79d;
+}
+
+.no-button {
+  background-color: white;
+  color: #4b3d2d;
+  font-family: 'Montserrat', sans-serif; /* Đảm bảo font chữ không bị méo */
+  font-weight: bold;
+}

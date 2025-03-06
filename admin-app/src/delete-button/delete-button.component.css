@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.delete-button {
+  background-color: #ddd7c0; /* Màu nền của nút */
+  color: #4b3d2d; /* Màu chữ */
+  border: none;
+  border-radius: 5px; /* Bo góc */
+  padding: 12px 30px;
+  font-family: 'Montserrat', sans-serif; /* Font Montserrat Bold */
+  font-weight: bold;
+  font-size: 15px; /* Kích thước font chữ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+  width: 137px; /* Chiều rộng */
+  height: 42px; /* Chiều cao */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
+}
+
+.delete-button:hover {
+  background-color: #b1a681; /* Màu khi hover */
+  transform: translateY(-2px); /* Đẩy nút lên một chút khi hover */
+}
+
+.delete-button:focus {
+  outline: none;
+}

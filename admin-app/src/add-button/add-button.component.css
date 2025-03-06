@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.add-button {
+  background-color: #c4b79d; /* Màu nền giống trong ảnh */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Bo góc */
+  padding: 15px 20px;
+  font-family: 'Montserrat', sans-serif; /* Font Montserrat Bold */
+  font-weight: bold;
+  font-size: 16px; /* Kích thước font chữ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 103px; /* Chiều rộng */
+  height: 40px; /* Chiều cao */
+}
+
+.add-button:hover {
+  background-color: #a08a62; /* Màu nền khi hover */
+}
+
+.add-button svg {
+  fill: white; /* Màu cho icon */
+}
+
+.add-button:focus {
+  outline: none;
+}
+
+.add-text {
+  font-size: 16px;
+}
