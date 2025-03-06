@@ -1,0 +1,79 @@
+.form-container {
+    background-color: #F4F2EB;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.form-container h1,
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #595031;
+}
+
+fieldset {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #D1CBB8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #D1CBB8;
+}
+
+th {
+    background-color: #8A7F52;
+    color: white;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: #DDD7C0;
+    color: #595031;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #C5BFA7;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 4dvh;
+}
+
+.back-button {
+    background-color: #8A7F52;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.order-status {
+    font-size: 18px;
+    font-weight: 600;
+    color: #595031;
+    margin-bottom: 20px;
+}

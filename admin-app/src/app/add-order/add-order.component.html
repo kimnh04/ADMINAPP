@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .form-container {
+            background-color: #F4F2EB;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        .form-container h1,
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #595031;
+        }
+
+        fieldset {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #D1CBB8;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #D1CBB8;
+        }
+
+        th {
+            background-color: #8A7F52;
+            color: white;
+        }
+
+        .btn-remove {
+            background-color: #8A7F52;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding-top: 4dvh;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            /* adjusted padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: #DDD7C0;
+            color: #595031;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #C5BFA7;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Add Order</h1>
+        <fieldset>
+            <div>
+                <label>Customer Name</label>
+                <input type="text" autocomplete="off">
+                <label>Phone Number</label>
+                <input type="text" autocomplete="off">
+                <label>Address</label>
+                <input type="text" autocomplete="off">
+                <label>Special Note/Request</label>
+                <textarea placeholder="Enter special request..."></textarea>
+            </div>
+            <h2>Product Lists</h2>
+            <input type="text" id="product-search" placeholder="Search product...">
+            <button onclick="addProduct()">Add Product</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Sub Total</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="product-list"></tbody>
+            </table>
+            <p>Total amount: <span id="total">0</span> (VND)</p>
+            <label>Shipping Method</label>
+            <select>
+                <option value="standard">Standard Shipping</option>
+                <option value="express">Express Shipping</option>
+                <option value="pickup">Store Pickup</option>
+            </select>
+            <label>Payment Method</label>
+            <select>
+                <option value="cash">Cash on Delivery</option>
+                <option value="card">Credit Card</option>
+                <option value="momo">Momo</option>
+            </select>
+            <div class="action-buttons">
+                <button class="btn" onclick="window.history.back()">Back</button>
+                <button class="btn" onclick="clearForm()">Clear</button>
+                <button class="btn" onclick="confirmOrder()">Confirm Order</button>
+                <button class="btn">Save</button>
+            </div>
+        </fieldset>
+    </div>
+    <script>
+        let total = 0;
+        function addProduct() {
+            const search = document.getElementById("product-search").value;
+            if (search) {
+                const price = Math.floor(Math.random() * 1000) + 100;
+                const table = document.getElementById("product-list");
+                const row = `<tr>
+                  <td>${search}</td>
+                  <td><input type='number' value='1' min='1' onchange='updateTotal(this, ${price})'></td>
+                  <td>${price}</td>
+                  <td>${price}</td>
+                  <td><button class='btn-remove' onclick='removeProduct(this)'>–</button></td>
+                </tr>`;
+                table.innerHTML += row;
+                calculateTotal();
+                document.getElementById("product-search").value = "";
+            }
+        }
+        function updateTotal(input, price) {
+            const quantity = parseInt(input.value) || 1;
+            input.parentElement.nextElementSibling.innerText = price * quantity;
+            calculateTotal();
+        }
+        function removeProduct(btn) {
+            const row = btn.parentElement.parentElement;
+            row.remove();
+            calculateTotal();
+        }
+        function calculateTotal() {
+            total = Array.from(document.querySelectorAll("#product-list tr")).reduce((sum, row) => {
+                return sum + parseInt(row.children[3].innerText);
+            }, 0);
+            document.getElementById("total").innerText = total;
+        }
+        function clearForm() {
+            document.querySelectorAll("input, textarea").forEach(input => input.value = "");
+            document.getElementById("product-list").innerHTML = "";
+            document.getElementById("total").innerText = "0";
+        }
+        function confirmOrder() {
+            alert("Order Confirmed!");
+            clearForm();
+        }
+    </script>
+</body>
+
+</html>

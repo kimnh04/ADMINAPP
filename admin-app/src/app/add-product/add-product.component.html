@@ -1,1 +1,239 @@
-<p>add-product works!</p>
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reusable Form</title>
+  <style>
+    .form-container {
+      background-color: #F4F2EB;
+      padding: 20px;
+      border-radius: 10px;
+      margin: auto;
+      /* Căn giữa */
+    }
+
+    .form-container h1,
+    .form-container h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #595031;
+      margin-bottom: 20px;
+    }
+
+    .form-container h1 {
+      font-weight: 700;
+      font-size: 32px;
+    }
+
+    .form-container h2 {
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    fieldset {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #D1CBB8;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #4D4D4D;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 20px;
+      margin-bottom: 24px;
+      border: 1px solid #D1CBB8;
+      border-radius: 5px;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding-top: 4dvh;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      background-color: #DDD7C0;
+      color: #595031;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn:hover {
+      background-color: #C5BFA7;
+    }
+  </style>
+  <script>
+    function formatPrice(input) {
+      let value = input.value.replace(/\D/g, "");
+      input.value = new Intl.NumberFormat('vi-VN').format(value);
+    }
+  </script>
+</head>
+
+<body>
+  <div class="form-container">
+    <h1>Add Product</h1>
+    <form>
+      <fieldset>
+        <h2>Product Information</h2>
+
+        <label>Product Name</label>
+        <input type="text" placeholder="Enter product name">
+
+        <label>Image</label>
+        <input type="text" placeholder="Image URL">
+
+        <div class="row">
+          <div class="col">
+            <label>Product Category</label>
+            <select>
+              <option>Basic Jewelry</option>
+              <option>High-quality Jewelry</option>
+              <option>Premium Jewelry</option>
+            </select>
+          </div>
+          <div class="col">
+            <label>Status</label>
+            <select>
+              <option>Active</option>
+              <option>Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Description</label>
+        <textarea rows="5" placeholder="Write description here..."></textarea>
+
+        <div class="row">
+          <div class="col">
+            <label>Price</label>
+            <input type="text" placeholder="Price" oninput="formatPrice(this)">
+          </div>
+          <div class="col">
+            <label>Origin</label>
+            <input type="text" placeholder="Origin">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Stock</label>
+            <input type="number" placeholder="Stock">
+          </div>
+          <div class="col">
+            <label>Customize</label>
+            <input type="text" placeholder="Customize">
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="action-buttons">
+        <button type="button" class="btn">Back</button>
+        <button type="reset" class="btn">Clear</button>
+        <button type="submit" class="btn">Save</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html> -->
+
+<div class="form-container">
+  <h1>Add Product</h1>
+  <form (submit)="onSubmit($event)">
+    <fieldset>
+      <h2>Product Information</h2>
+
+      <label>Product Name</label>
+      <input type="text" placeholder="Enter product name">
+
+      <label>Image</label>
+      <!-- <input type="file" placeholder="Image URL"> -->
+      <input type="file" id="productImage" accept="image/*" />
+
+      <div class="row">
+        <div class="col">
+          <label>Product Category</label>
+          <select>
+            <option>Basic Jewelry</option>
+            <option>High-quality Jewelry</option>
+            <option>Premium Jewelry</option>
+          </select>
+        </div>
+        <div class="col">
+          <label>Status</label>
+          <select>
+            <option>Active</option>
+            <option>Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Description</label>
+      <textarea rows="5" placeholder="Write description here..."></textarea>
+
+      <div class="row">
+        <div class="col">
+          <label>Price</label>
+          <input type="text" placeholder="Price" (input)="formatPrice($event)">
+        </div>
+        <div class="col">
+          <label>Origin</label>
+          <input type="text" placeholder="Origin">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Stock</label>
+          <input type="number" placeholder="Stock">
+        </div>
+        <div class="col">
+          <label>Customize</label>
+          <input type="text" placeholder="Customize">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="action-buttons">
+      <button type="button" class="btn">Back</button>
+      <button type="reset" class="btn">Clear</button>
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,186 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-container {
+            background-color: #F4F2EB;
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+        }
+
+        .form-container h1,
+        .form-container h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #595031;
+            margin-bottom: 20px;
+        }
+
+        .form-container h1 {
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        .form-container h2 {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        fieldset {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #D1CBB8;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4D4D4D;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 20px;
+            margin-bottom: 24px;
+            border: 1px solid #D1CBB8;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding-top: 4dvh;
+        }
+
+        .btn {
+            width: 150px;
+            height: 50px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: #DDD7C0;
+            color: #595031;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            background-color: #C5BFA7;
+        }
+    </style>
+</head>
+<body> -->
+<div class="form-container">
+    <h1>Add New Reservation</h1>
+
+    <fieldset>
+        <legend>Customer Information</legend>
+        <div class="row">
+            <div class="col">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" placeholder="Customer Name"/>
+            </div>
+            <div class="col">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" placeholder="Phone Number"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Email Address"/>
+            </div>
+            <div class="col">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Reservation Details</legend>
+        <div class="row">
+            <div class="col">
+                <label for="appointmentDate">Appointment Date & Time</label>
+                <input type="datetime-local" id="appointmentDate"/>
+            </div>
+            <div class="col">
+                <label for="serviceType">Service Type</label>
+                <select id="serviceType">
+                    <option>Piercing Service</option>
+                    <option>After-care Service</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="reservationLocation">Rebound Branch</label>
+                <select id="reservationLocation">
+                    <option>Rebound Cao Ba Quat - Ha Noi</option>
+                    <option>Rebound Tam Khuong - Ha Noi</option>
+                    <option>Rebound Ly Tu Trong - Ho Chi Minh</option>
+                    <option>Rebound Dien Bien Phu - Ho Chi Minh</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="jewelryType">Jewelry Type</label>
+                <select id="jewelryType">
+                    <option>Ear Piercing Jewelry</option>
+                    <option>Body Piercing Jewelry</option>
+                    <option>Other</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="specialRequests">Special Requests/Notes</label>
+        <textarea id="specialRequests" rows="4" placeholder="Enter any special requests or notes here"></textarea>
+    </fieldset>
+
+    <div class="action-buttons">
+        <button class="btn" onclick="goBack()">Back</button>
+        <button type="reset" class="btn">Clear</button>
+        <button class="btn" onclick="setReservation()">Set</button>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        alert("Go Back button clicked");
+    }
+
+    function setReservation() {
+        alert("Successful!");
+    }
+</script>
+<!-- </body> -->
+<!-- </html> -->
