@@ -1,7 +1,0 @@
-<div *ngFor="let item of items; let i = index">
-    <input type="checkbox" [(ngModel)]="item.selected"> <!-- Dùng ngModel để bind dữ liệu -->
-    {{ item.name }}
-  </div>
-  
-  <button class="delete-button" (click)="deleteSelectedItems()">Delete</button>
-  
