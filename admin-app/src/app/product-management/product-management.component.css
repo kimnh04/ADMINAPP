@@ -1,0 +1,198 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;  /* Sử dụng Montserrat cho toàn bộ trang */
+}
+
+body {
+    color: #595031;
+    font-size: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-table-header {
+    background-color: #A89D6E;
+    color: white;
+}
+
+.product-table th, .product-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.product-table-row {
+    background-color: white;
+}
+
+.product-table-row:hover {
+    background-color: #f5f5f5;
+}
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    background-color: #f0f0f0;
+}
+
+.product-name {
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background-color: #2196F3;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+.header-checkbox {
+    visibility: hidden;
+}
+
+button {
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.product-table th, .product-table td {
+    padding: 12px 15px;
+    text-align: center; /* Căn giữa theo chiều ngang */
+    vertical-align: middle; /* Căn giữa theo chiều dọc */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.product-image {
+    display: block;
+    margin: auto;
+}
+
+.product-table th:nth-child(1), .product-table td:nth-child(1) { width: 5%; } /* Checkbox */
+.product-table th:nth-child(2), .product-table td:nth-child(2) { width: 10%; } /* Image */
+.product-table th:nth-child(3), .product-table td:nth-child(3) { width: 20%; } /* Name */
+.product-table th:nth-child(4), .product-table td:nth-child(4) { width: 10%; } /* ID */
+.product-table th:nth-child(5), .product-table td:nth-child(5) { width: 10%; } /* Price */
+.product-table th:nth-child(6), .product-table td:nth-child(6) { width: 10%; } /* Stock */
+.product-table th:nth-child(7), .product-table td:nth-child(7) { width: 10%; } /* Status */
+.product-table th:nth-child(8), .product-table td:nth-child(8) { width: 10%; } /* Category */
+.product-table th:nth-child(9), .product-table td:nth-child(9) { width: 15%; }
+
+.table-actions {
+    display: flex;
+    align-items: center;
+    padding-left: 50px; /* Tăng khoảng cách sang phải */
+}
+
+.delete-button {
+    background-color: #ddd7c0; /* Màu nền của nút */
+    color: #4b3d2d; /* Màu chữ */
+    border: none;
+    border-radius: 5px; /* Bo góc */
+    padding: 12px 30px;
+    font-family: 'Montserrat', sans-serif; /* Font Montserrat Bold */
+    font-weight: bold;
+    font-size: 15px; /* Kích thước font chữ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Hiệu ứng hover */
+    width: 137px; /* Chiều rộng */
+    height: 42px; /* Chiều cao */
+    margin: 20px auto; /* Căn giữa nút */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Drop shadow */
+}
+
+.delete-button:hover {
+    background-color: #b1a681; /* Màu khi hover */
+    transform: translateY(-2px); /* Đẩy nút lên một chút khi hover */
+}
+
+.delete-button:focus {
+    outline: none;
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 103px;
+    height: 40px;
+    background-color: #C4B79D;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    position: absolute; /* Để đặt nút ở vị trí cố định */
+    right: 20px; /* Căn phải cách 20px từ lề phải */
+    top: 120px; /* Cách lề trên 20px */
+}
+
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 7px;
+    padding: 0;
+    color: #595031;
+    font-weight: bold;
+}
+
+.header h3 {
+    font-size: 24px;
+    margin-bottom: 82px;
+    padding: 0;
+    color: #595031;
+}
