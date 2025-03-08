@@ -7,3 +7,6 @@
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif; /* Áp dụng font cho toàn bộ dự án */
 }
+router-outlet + * {
+  display: block !important;
+}

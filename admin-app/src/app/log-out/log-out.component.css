@@ -1,0 +1,87 @@
+/* Modal background */
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Modal content box */
+.modal-content {
+  width: 350px;
+  height: 168px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Căn giữa theo chiều dọc */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  font-family: 'Montserrat', sans-serif;
+/* Giảm khoảng cách giữa các phần tử */
+}
+
+/* Modal header text */
+.modal-header h2 {
+  font-size: 16px;
+  color: #131927;
+  text-align: center;
+  margin-bottom: 4px; /* Giảm khoảng cách giữa tiêu đề và câu hỏi */
+}
+
+/* Modal body text */
+.modal-body p {
+  font-size: 14px;
+  color: #6D717F;
+  text-align: center;
+  margin-top: 4px; /* Giảm khoảng cách giữa câu hỏi và các nút */
+  margin-bottom: 16px; /* Cách giữa câu hỏi và các nút */
+}
+
+/* Modal footer and buttons */
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Căn giữa các nút */
+  width: 100%; /* Đảm bảo các nút không bị lệch */
+}
+
+.button {
+  width: 137px;
+  height: 42px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #DDD7C0;
+  color: #595031;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Thêm drop shadow cho nút */
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng shadow khi hover */
+}
+
+/* Specific button colors */
+.yes-button {
+  background-color: #DDD7C0;
+  font-weight: bold;
+}
+
+.no-button {
+  background-color: #FFFFFF;
+/* Thêm viền cho nút No */
+  font-weight: bold;
+}
+
+/* Spacing between the buttons */
+.modal-footer button + button {
+  margin-left: 16px; /* Khoảng cách giữa các nút */
+}

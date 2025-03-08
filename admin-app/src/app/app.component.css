@@ -1,70 +1,8 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #DDD7C0; /* Màu nền */
-}
 
-.header img {
-  height: 40px; /* Điều chỉnh kích thước logo */
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header .icon-bell {
-  width: 32px;
-  height: 32px;
-  background-size: contain;
-  color: #F4F2EB;
-  align-content: center;
-}
-
-.header .icon-bell svg {
-  width: 24px;
-  height: 24px;
-}
-
-.user-icon {
-  width: 40px;
-  height: 40px;
-  background-color: #CFC7A6; /* Màu nền */
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.user-icon svg {
-  width: 24px;
-  height: 24px;
-  fill: #fff; /* Màu của icon */
-}
-
-
-
-.side-nav-bar {
-    width: 250px;
-    height: 100vh;
-    background-color: #DDD7C0; /* Màu nền */
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    gap: 0px; 
-    border-color: #F4F2EB;
-    border-style:solid;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    border: 0.5px solid #F4F2EB;
-
-  }
-  
   .nav-item {
+    list-style: none;
     display: flex;
     align-items: center;
     padding: 15px;
@@ -91,3 +29,71 @@
     background-size: contain;
   }
   
+  .app-container {
+    display: flex;
+    flex-direction: column; /* Chia layout theo chiều dọc */
+    height: 100vh; /* Full màn hình */
+  }
+  
+
+  
+  .content-container {
+    display: flex; /* Chia layout ngang giữa sidebar và nội dung */
+    flex: 1; /* Chiếm phần còn lại dưới header */
+    overflow: hidden; /* Ẩn scroll tổng thể */
+  }
+  
+  .side-nav-bar {
+    width: 250px; 
+    height: 100%; /* Sidebar full chiều cao trong content-container */
+    background-color: #DDD7C0;
+    display: flex;
+    flex-direction: column;
+    border-right: 0.5px solid #F4F2EB;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  
+  .content {
+    flex: 1; /* Chiếm phần còn lại của màn hình */
+    overflow: auto; /* Chỉ scroll nội dung */
+    background-color: #F4F2EB;
+    padding: 100px; 
+  }
+
+
+.custom-container {
+  display: flex;
+  gap: 56px; /* Khoảng cách 56px giữa các phần tử */
+}
+
+.custom-box {
+  width: 329px;
+  height: 152px;
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 329px; /* Không cho phép co giãn hoặc nở rộng, chiều rộng cố định */
+}
+
+.custom-text {
+  color: #595031;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.custom-number {
+  color: #595031;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
