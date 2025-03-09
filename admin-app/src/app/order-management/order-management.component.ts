@@ -1,5 +1,6 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, computed, effect, Inject, LOCALE_ID, signal } from '@angular/core';
 import { CommonModule, formatCurrency } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 interface Order {
   id: string;
@@ -7,65 +8,71 @@ interface Order {
   quantity: number;
   unitPrice: number;
   subTotal: number;
-  selected: boolean; // To track selected orders
+  selected: boolean;
 }
 
 @Component({
   selector: 'app-order-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './order-management.component.html',
   styleUrls: ['./order-management.component.css']
 })
 export class OrderManagementComponent {
-  orders: Order[] = [
+  orders = signal<Order[]>([
     { id: 'O001', productName: 'Product A', quantity: 2, unitPrice: 50000, subTotal: 100000, selected: false },
     { id: 'O002', productName: 'Product B', quantity: 1, unitPrice: 75000, subTotal: 75000, selected: false }
-  ];
+  ]);
 
-  // Cập nhật số lượng đơn hàng
-  orderCount: number = this.orders.length;
+  orderCount = computed(() => this.orders().length);
+  searchQuery = signal('');
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  filteredOrders = computed(() =>
+    this.orders().filter(order =>
+      order.productName.toLowerCase().includes(this.searchQuery().toLowerCase()) ||
+      order.id.toLowerCase().includes(this.searchQuery().toLowerCase()) // Có thể lọc theo ID
+    )
+  );
 
-  // Xử lý chọn tất cả đơn hàng
+
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private router: Router // Inject Router
+  ) {
+    effect(() => console.log('Search Query:', this.searchQuery()));
+  }
+
+  updateSearchQuery(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery.set(inputElement.value);
+  }
+
   selectAllOrders(event: any) {
     const isChecked = event.target.checked;
-    this.orders.forEach(order => {
-      order.selected = isChecked;
-    });
+    this.orders.update(orders => orders.map(order => ({ ...order, selected: isChecked })));
   }
 
-  // Xử lý chọn đơn hàng riêng biệt
-  toggleOrderSelection(order: Order) {
-    order.selected = !order.selected;
+  toggleOrderSelection(orderId: string) {
+    this.orders.update(orders =>
+      orders.map(order =>
+        order.id === orderId ? { ...order, selected: !order.selected } : order
+      )
+    );
   }
 
-  // Xử lý xóa những đơn hàng được chọn
   deleteSelectedOrders() {
-    this.orders = this.orders.filter(order => !order.selected);
-    this.updateOrderCount();
+    this.orders.update(orders => orders.filter(order => !order.selected));
   }
 
-  // Xóa đơn hàng theo ID
   deleteOrder(orderId: string) {
-    this.orders = this.orders.filter(order => order.id !== orderId);
-    this.updateOrderCount();
+    this.orders.update(orders => orders.filter(order => order.id !== orderId));
   }
 
-  // Cập nhật số lượng đơn hàng
-  updateOrderCount() {
-    this.orderCount = this.orders.length;
-  }
-
-  // Hàm format tiền tệ
   formatPrice(price: number): string {
     return formatCurrency(price, this.locale, '', 'VND').replace('VND', '') + ' ₫';
   }
 
-  // Hàm chỉnh sửa đơn hàng (Chưa triển khai)
   editOrder(order: Order) {
     console.log('Editing order:', order);
-    // Logic chỉnh sửa đơn hàng sẽ được thêm vào đây
   }
 }

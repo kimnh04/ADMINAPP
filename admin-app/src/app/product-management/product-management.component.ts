@@ -1,5 +1,6 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, Inject, LOCALE_ID, signal, effect, computed } from '@angular/core';
 import { CommonModule, formatCurrency } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 interface Product {
   id: string;
@@ -9,63 +10,83 @@ interface Product {
   status: string;
   category: string;
   imageUrl: string;
-  selected: boolean; // Thêm thuộc tính selected
+  selected: boolean; 
 }
 
 @Component({
   selector: 'app-product-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-management.component.html',
   styleUrls: ['./product-management.component.css']
 })
 export class ProductManagementComponent {
-  products: Product[] = [
-    { id: 'P001', name: 'Sample Product', price: 100000, stock: 20, status: 'Available', category: 'Electronics', imageUrl: 'images/sample.jpg', selected: false }
-  ];
+  products = signal<Product[]>([
+    { id: 'P001', name: 'Sample Product', price: 100000, stock: 20, status: 'Active', category: 'Electronics', imageUrl: 'images/sample.jpg', selected: false },
+    { id: 'P002', name: 'Gaming Mouse', price: 500000, stock: 15, status: 'Active', category: 'Accessories', imageUrl: 'images/mouse.jpg', selected: false },
+    { id: 'P003', name: 'Mechanical Keyboard', price: 1200000, stock: 10, status: 'Inactive', category: 'Accessories', imageUrl: 'images/keyboard.jpg', selected: false }
+  ]);
 
-  // Cập nhật số lượng sản phẩm
-  productCount: number = this.products.length;
+  // Biến tìm kiếm sản phẩm
+  searchQuery = signal('');
+  filteredProducts = computed(() => {
+    const query = this.searchQuery().trim().toLowerCase();
+    return this.products().filter(product =>
+      query === '' || 
+      product.id.toLowerCase().includes(query) ||
+      product.name.toLowerCase().includes(query) ||
+      product.category.toLowerCase().includes(query) ||
+      product.status.toLowerCase().includes(query)
+    );
+  });
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private router: Router // Inject Router
+  ) {
+    effect(() => console.log('Search Query:', this.searchQuery()));
+  }
 
+  // Cập nhật tìm kiếm từ input
+  updateSearchQuery(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery.set(inputElement.value.trim());
+  }
+
+  // Đổi trạng thái sản phẩm
   toggleStatus(product: Product) {
-    product.status = product.status === 'In stock' ? 'Out of stock' : 'In stock';
+    product.status = product.status === 'Active' ? 'Inactive' : 'Active';
   }
 
+  // Xóa sản phẩm
   deleteProduct(productId: string) {
-    this.products = this.products.filter(product => product.id !== productId);
-    this.updateProductCount();
+    this.products.set(this.products().filter(product => product.id !== productId));
   }
 
+  // Sửa sản phẩm
   editProduct(product: Product) {
     console.log('Editing product:', product);
   }
 
+  // Format giá tiền
   formatPrice(price: number): string {
     return formatCurrency(price, this.locale, '', 'VND').replace('VND', '') + ' ₫';
   }
 
-  // Xử lý chọn tất cả sản phẩm
+  // Chọn hoặc bỏ chọn tất cả sản phẩm
   selectAllProducts(event: any) {
     const isChecked = event.target.checked;
-    this.products.forEach(product => {
-      product.selected = isChecked;
-    });
+    this.products.set(this.products().map(product => ({ ...product, selected: isChecked })));
   }
 
-  // Xử lý chọn sản phẩm riêng biệt
+  // Chọn sản phẩm riêng biệt
   toggleProductSelection(product: Product) {
     product.selected = !product.selected;
   }
 
+  // Xóa các sản phẩm đã chọn
   deleteSelectedProducts() {
-    this.products = this.products.filter(product => !product.selected);
-    this.updateProductCount();
+    this.products.set(this.products().filter(product => !product.selected));
   }
 
-  // Cập nhật số lượng sản phẩm
-  updateProductCount() {
-    this.productCount = this.products.length;
-  }
 }

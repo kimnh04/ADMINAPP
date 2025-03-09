@@ -1,5 +1,6 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component, Inject, LOCALE_ID, signal, effect, computed } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 interface Reservation {
   id: string;
@@ -7,68 +8,74 @@ interface Reservation {
   serviceType: string;
   status: string;
   reservationDate: string;
-  selected: boolean; // Add selected property for handling checkbox state
+  selected: boolean; // Checkbox state
 }
 
 @Component({
   selector: 'app-reservation-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './reservation-management.component.html',
   styleUrls: ['./reservation-management.component.css']
 })
 export class ReservationManagementComponent {
-  reservations: Reservation[] = [
-    { id: 'R001', customerName: 'John Doe', serviceType: 'Consulting', status: 'Confirmed', reservationDate: '2025-03-10', selected: false }
-  ];
+  reservations = signal<Reservation[]>([
+    { id: 'R001', customerName: 'John Doe', serviceType: 'Consulting', status: 'Confirmed', reservationDate: '2025-03-10', selected: false },
+    { id: 'R002', customerName: 'Jane Smith', serviceType: 'Coaching', status: 'Pending', reservationDate: '2025-03-15', selected: false },
+    { id: 'R003', customerName: 'Alice Brown', serviceType: 'Advisory', status: 'Confirmed', reservationDate: '2025-04-01', selected: false }
+  ]);
 
-  // Update the reservation count
-  reservationCount: number = this.reservations.length;
+  // Biến tìm kiếm
+  searchQuery = signal('');
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  // Tự động cập nhật danh sách đặt chỗ theo từ khóa tìm kiếm
+  filteredReservations = computed(() =>
+    this.reservations().filter(reservation =>
+      reservation.customerName.toLowerCase().includes(this.searchQuery().toLowerCase()) ||
+      reservation.serviceType.toLowerCase().includes(this.searchQuery().toLowerCase()) ||
+      reservation.status.toLowerCase().includes(this.searchQuery().toLowerCase()) ||
+      reservation.id.toLowerCase().includes(this.searchQuery().toLowerCase())
+    )
+  );
 
-  // Format the reservation date
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private router: Router // Inject Router
+  ) {
+    effect(() => console.log('Search Query:', this.searchQuery()));
+  }
+
   formatDate(date: string): string {
     return formatDate(date, 'mediumDate', this.locale);
   }
 
-  // Toggle reservation status
+  updateSearchQuery(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchQuery.set(inputElement.value);
+  }
+
   toggleStatus(reservation: Reservation) {
     reservation.status = reservation.status === 'Confirmed' ? 'Cancelled' : 'Confirmed';
   }
 
-  // Delete a reservation by its ID
   deleteReservation(reservationId: string) {
-    this.reservations = this.reservations.filter(reservation => reservation.id !== reservationId);
-    this.updateReservationCount();
+    this.reservations.set(this.reservations().filter(reservation => reservation.id !== reservationId));
   }
 
-  // Edit a reservation (logic can be added later)
   editReservation(reservation: Reservation) {
     console.log('Editing reservation:', reservation);
   }
 
-  // Select or deselect all reservations
   selectAllReservations(event: any) {
     const isChecked = event.target.checked;
-    this.reservations.forEach(reservation => {
-      reservation.selected = isChecked;
-    });
+    this.reservations.set(this.reservations().map(reservation => ({ ...reservation, selected: isChecked })));
   }
 
-  // Toggle selection of an individual reservation
   toggleReservationSelection(reservation: Reservation) {
     reservation.selected = !reservation.selected;
   }
 
-  // Delete selected reservations
   deleteSelectedReservations() {
-    this.reservations = this.reservations.filter(reservation => !reservation.selected);
-    this.updateReservationCount();
-  }
-
-  // Update the total reservation count
-  updateReservationCount() {
-    this.reservationCount = this.reservations.length;
+    this.reservations.set(this.reservations().filter(reservation => !reservation.selected));
   }
 }

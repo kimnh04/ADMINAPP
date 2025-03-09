@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
@@ -19,12 +20,17 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AddProductComponent } from './add-product/add-product.component';
+import {LogInComponent} from './log-in/log-in.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AddOrderComponent,
+    AddProductComponent,
     AddReservationComponent,
     OrderDetailComponent,
     EditProductComponent,
@@ -38,6 +44,8 @@ import { RouterModule } from '@angular/router';
     ProductManagementComponent,
     LogOutComponent,
     HeaderComponent,
+    LogInComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -46,6 +54,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     RouterModule.forRoot([]),
+    FormBuilder, FormGroup, Validators,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

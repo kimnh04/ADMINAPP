@@ -21,7 +21,11 @@
     color: #fff; 
   }
 
-  
+  .content {
+    flex: 1; /* Chiếm phần còn lại của không gian */
+    padding: 20px;
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
+  }
   .icon {
     width: 24px;
     height: 24px;
@@ -34,8 +38,6 @@
     flex-direction: column; /* Chia layout theo chiều dọc */
     height: 100vh; /* Full màn hình */
   }
-  
-
   
   .content-container {
     display: flex; /* Chia layout ngang giữa sidebar và nội dung */
@@ -57,10 +59,10 @@
   }
   
   .content {
-    flex: 1; /* Chiếm phần còn lại của màn hình */
+    flex: 1; /* Nội dung chiếm phần còn lại */
     overflow: auto; /* Chỉ scroll nội dung */
     background-color: #F4F2EB;
-    padding: 100px; 
+    padding: 20px; 
   }
 
 
