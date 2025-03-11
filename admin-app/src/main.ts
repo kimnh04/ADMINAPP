@@ -17,12 +17,11 @@ bootstrapApplication(AppComponent, {
     { path: 'add-order', loadComponent: () => import('./app/add-order/add-order.component').then(m => m.AddOrderComponent) },
     { path: 'add-reservation', loadComponent: () => import('./app/add-reservation/add-reservation.component').then(m => m.AddReservationComponent) },
     { path: 'log-in', loadComponent: () => import('./app/log-in/log-in.component').then(m => m.LogInComponent) },
-
-
+    { path: 'order-detail', loadComponent: () => import('./app/order-detail/order-detail.component').then(m => m.OrderDetailComponent) },
+    {path: 'edit-customer', loadComponent: () => import('./app/edit-customer/edit-customer.component').then(m => m.EditCustomerComponent) },
+    {path: 'reservation-detail', loadComponent: () => import('./app/reservation-detail/reservation-detail.component').then(m => m.ReservationDetailComponent) },
+    {path: 'edit-product', loadComponent: () => import('./app/edit-product/edit-product.component').then(m => m.EditProductComponent) },
     
-    
-
-
 
   ])]
 })

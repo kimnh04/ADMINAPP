@@ -10,6 +10,10 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddOrderComponent } from './add-order/add-order.component';
 import { AddReservationComponent } from './add-reservation/add-reservation.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -23,6 +27,12 @@ const routes: Routes = [
   { path: 'add-order', component: AddOrderComponent },
   { path: 'add-reservation', component: AddReservationComponent },
   { path: 'log-in', component: LogInComponent },
+  { path: 'order-detail', component: OrderDetailComponent},
+  { path: 'edit-customer', component: EditCustomerComponent},
+  { path: 'reservation-detail', component: ReservationDetailComponent},
+  { path: 'edit-product', component: EditProductComponent},
+  { path: 'app-log-in', component: LogInComponent},
+
 ];
 
 @NgModule({

@@ -1,101 +1,62 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
-  .nav-item {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    gap: 10px;
-    cursor: pointer;
-    border: 0.5px solid #F4F2EB;
-  }
-  
-  .nav-item:hover {
-    background-color: #C2B694;
-    color: #F4F2EB; 
-  }
-  
-  .nav-item.active {
-    background-color: #A6986B; 
-    color: #fff; 
-  }
-
-  .content {
-    flex: 1; /* Chiếm phần còn lại của không gian */
-    padding: 20px;
-    overflow-y: auto; /* Cho phép cuộn nếu nội dung dài */
-  }
-  .icon {
-    width: 24px;
-    height: 24px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  
-  .app-container {
-    display: flex;
-    flex-direction: column; /* Chia layout theo chiều dọc */
-    height: 100vh; /* Full màn hình */
-  }
-  
-  .content-container {
-    display: flex; /* Chia layout ngang giữa sidebar và nội dung */
-    flex: 1; /* Chiếm phần còn lại dưới header */
-    overflow: hidden; /* Ẩn scroll tổng thể */
-  }
-  
-  .side-nav-bar {
-    width: 250px; 
-    height: 100%; /* Sidebar full chiều cao trong content-container */
-    background-color: #DDD7C0;
-    display: flex;
-    flex-direction: column;
-    border-right: 0.5px solid #F4F2EB;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    flex-shrink: 0;
-  }
-  
-  .content {
-    flex: 1; /* Nội dung chiếm phần còn lại */
-    overflow: auto; /* Chỉ scroll nội dung */
-    background-color: #F4F2EB;
-    padding: 20px; 
-  }
-
-
-.custom-container {
+.app-container {
   display: flex;
-  gap: 56px; /* Khoảng cách 56px giữa các phần tử */
+  flex-direction: column; /* Sắp xếp các phần tử con theo chiều dọc */
+  height: 100vh; /* Chiều cao toàn bộ màn hình */
 }
 
-.custom-box {
-  width: 329px;
-  height: 152px;
-  background-color: #ffffff;
-  border-radius: 25px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+
+.content-container {
+  display: flex; /* Sử dụng flex để chia phần cho sidebar và nội dung */
+  flex: 1; /* Chiếm phần còn lại của màn hình dưới header */
+}
+
+.side-nav-bar {
+  width: 250px; /* Sidebar có chiều rộng cố định */
+  background-color: #DDD7C0;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: column; /* Sắp xếp các mục theo chiều dọc */
+  border-right: 0.5px solid #F4F2EB;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  height: 100%; /* Chiếm toàn bộ chiều cao của content-container */
+  position: sticky; /* Đảm bảo sidebar luôn cố định khi cuộn */
+  top: 0;
+}
+
+.nav-item {
+  list-style: none;
+  display: flex;
   align-items: center;
-  flex: 0 0 329px; /* Không cho phép co giãn hoặc nở rộng, chiều rộng cố định */
+  padding: 15px;
+  gap: 10px;
+  cursor: pointer;
+  border: 0.5px solid #F4F2EB;
+  height: 60px; /* Đặt chiều cao cho mỗi mục */
 }
 
-.custom-text {
-  color: #595031;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
+.nav-item:hover {
+  background-color: #C2B694;
+  color: #F4F2EB;
 }
 
-.custom-number {
-  color: #595031;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0;
+.nav-item.active {
+  background-color: #A6986B;
+  color: #fff;
+}
+
+.icons {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.content {
+  flex: 1; /* Nội dung chiếm phần còn lại */
+  padding: 20px;
+  background-color: #F4F2EB;
+  overflow-y: auto; /* Chỉ scroll phần nội dung */
 }

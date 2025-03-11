@@ -49,7 +49,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, // Chỉ cần import AppRoutingModule thôi
+    AppRoutingModule, 
     FormsModule,
     CommonModule,
     RouterModule,
