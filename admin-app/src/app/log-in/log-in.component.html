@@ -1,45 +1,51 @@
-
 <div class="login-container">
-    <div class="login-wrapper">
-      <div class="ear-image-container">
+  <div class="login-wrapper">
+    <div class="ear-image-container">
+    </div>
+    <div class="login-form-container">
+      <div class="logo-container"></div>
+
+    <div class="form-feedback">
+      <div *ngIf="errorMessage" class="error-message">
+        <small>{{ errorMessage }}</small>
       </div>
-      <div class="login-form-container">
-        <div class="logo-container"></div>
-        
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-          <div class="form-group">
-            <label for="email">Email <span class="required">*</span></label>
-            <input 
-              type="email" 
-              id="email" 
-              formControlName="email" 
-              placeholder="Enter your email"
-            >
-          </div>
-          
-          <div class="form-group">
-            <label for="password">Password <span class="required">*</span></label>
-            <input 
-              type="password" 
-              id="password" 
-              formControlName="password" 
-              placeholder="Enter your password"
-            >
-          </div>
-          
-          <div class="form-options">
-            <div class="remember-password">
-              <input 
-                type="checkbox" 
-                id="rememberPassword" 
-                formControlName="rememberPassword"
-              >
-              <label for="rememberPassword">Remember password</label>
-            </div>
-            <a href="#" class="forgot-password">Forgot password</a>
-          </div>
-          <button type="submit" class="login-button">Log in</button>
-        </form>
+      <div *ngIf="successMessage" class="success-message">
+        <small>{{ successMessage }}</small>
       </div>
     </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email"  
+            placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password <span class="required">*</span></label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password"  
+            placeholder="Enter your password">
+        </div>
+        <div class="form-options">
+          <div class="remember-password">
+            <input 
+              type="checkbox" 
+              id="rememberPassword" 
+              formControlName="rememberPassword"
+            >
+            <label for="rememberPassword">Remember password</label>
+          </div>
+          <a class="forgot-password" routerLink="/forgot-password">Forgot password</a>
+        </div>
+        
+
+        <button type="submit" class="login-button">Log in</button>
+      </form>
+    </div>
   </div>
+</div>
