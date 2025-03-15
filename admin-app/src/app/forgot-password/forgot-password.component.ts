@@ -19,7 +19,7 @@ export class ForgotPasswordComponent {
   emailValid: boolean = true; // Biến để kiểm tra tính hợp lệ của email
 
   // Cố định email cần kiểm tra
-  fixedEmail: string = 'reboundpiecring.official@gmail.com';
+  fixedEmail: string = 'reboundpiercing.official@gmail.com';
 
   constructor(private fb: FormBuilder) {
     this.forgotPasswordForm = this.fb.group({

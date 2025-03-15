@@ -1,17 +1,9 @@
-import { Component, Inject, LOCALE_ID, signal, effect, computed } from '@angular/core';
-import { CommonModule, formatCurrency } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  stock: number;
-  status: string;
-  category: string;
-  imageUrl: string;
-  selected: boolean; 
-}
+import { ProductService } from '../services/product.service';
+import { ProductInterface } from '../models/product.model'; // Import ProductInterface
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-management',
@@ -20,73 +12,61 @@ interface Product {
   templateUrl: './product-management.component.html',
   styleUrls: ['./product-management.component.css']
 })
-export class ProductManagementComponent {
-  products = signal<Product[]>([
-    { id: 'P001', name: 'Sample Product', price: 100000, stock: 20, status: 'Active', category: 'Electronics', imageUrl: 'images/sample.jpg', selected: false },
-    { id: 'P002', name: 'Gaming Mouse', price: 500000, stock: 15, status: 'Active', category: 'Accessories', imageUrl: 'images/mouse.jpg', selected: false },
-    { id: 'P003', name: 'Mechanical Keyboard', price: 1200000, stock: 10, status: 'Inactive', category: 'Accessories', imageUrl: 'images/keyboard.jpg', selected: false }
-  ]);
+export class ProductManagementComponent implements OnInit {
 
-  // Biến tìm kiếm sản phẩm
-  searchQuery = signal('');
-  filteredProducts = computed(() => {
-    const query = this.searchQuery().trim().toLowerCase();
-    return this.products().filter(product =>
-      query === '' || 
-      product.id.toLowerCase().includes(query) ||
-      product.name.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query) ||
-      product.status.toLowerCase().includes(query)
+  products: ProductInterface[] = [];  // Dữ liệu sản phẩm sẽ được lấy từ API
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe(
+      (data: ProductInterface[]) => {
+        this.products = data;
+        console.log(this.products);  // Kiểm tra dữ liệu nhận được
+      },
+      (error: HttpErrorResponse) => {
+        console.error("Error fetching products:", error);
+      }
     );
-  });
+  }
+  
 
-  constructor(
-    @Inject(LOCALE_ID) private locale: string,
-    private router: Router // Inject Router
-  ) {
-    effect(() => console.log('Search Query:', this.searchQuery()));
+
+  // Format giá sản phẩm
+  formatPrice(price: string): string {
+    // Loại bỏ các ký tự không phải số và ký tự 'đ' cuối chuỗi
+    const numericValue = parseFloat(price.replace(/[^\d.-]/g, '').replace(',', '.'));
+  
+    // Nếu giá trị hợp lệ, định dạng lại giá trị và thêm dấu ₫ vào cuối
+    return numericValue ? numericValue.toLocaleString() + ' ₫' : 'N/A';
   }
 
-  // Cập nhật tìm kiếm từ input
-  updateSearchQuery(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchQuery.set(inputElement.value.trim());
-  }
-
-  // Đổi trạng thái sản phẩm
-  toggleStatus(product: Product) {
-    product.status = product.status === 'Active' ? 'Inactive' : 'Active';
-  }
-
-  // Xóa sản phẩm
-  deleteProduct(productId: string) {
-    this.products.set(this.products().filter(product => product.id !== productId));
-  }
-
-  // Sửa sản phẩm
-  editProduct(product: Product) {
-    console.log('Editing product:', product);
-  }
-
-  // Format giá tiền
-  formatPrice(price: number): string {
-    return formatCurrency(price, this.locale, '', 'VND').replace('VND', '') + ' ₫';
-  }
-
-  // Chọn hoặc bỏ chọn tất cả sản phẩm
-  selectAllProducts(event: any) {
+  // Chọn tất cả sản phẩm
+  selectAllProducts(event: any): void {
     const isChecked = event.target.checked;
-    this.products.set(this.products().map(product => ({ ...product, selected: isChecked })));
+    this.products = this.products.map(product => ({ ...product, selected: isChecked }));
   }
 
-  // Chọn sản phẩm riêng biệt
-  toggleProductSelection(product: Product) {
+  // Chọn hoặc bỏ chọn sản phẩm riêng biệt
+  toggleProductSelection(product: ProductInterface): void {
     product.selected = !product.selected;
   }
 
   // Xóa các sản phẩm đã chọn
-  deleteSelectedProducts() {
-    this.products.set(this.products().filter(product => !product.selected));
+  deleteSelectedProducts(): void {
+    this.products = this.products.filter(product => !product.selected);
   }
-
+    // Phương thức xóa sản phẩm
+    deleteProduct(productId: string): void {
+      this.productService.deleteProduct(productId).subscribe(
+        () => {
+          // Sau khi xóa thành công, lọc lại danh sách sản phẩm
+          this.products = this.products.filter(product => product.Product_ID !== productId);
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error deleting product:', error);  // Xử lý lỗi khi xóa sản phẩm
+        }
+      );
+    }
+  
 }

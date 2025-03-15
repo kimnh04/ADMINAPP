@@ -172,3 +172,7 @@ input[type="checkbox"] {
     background-color: #fff; /* Unchecked background */
     transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions for background and border */
 }
+.product-image{
+    width:50px;
+    height:50px;
+}

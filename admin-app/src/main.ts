@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter } from '@angular/router';
 import { DashboardComponent } from './app/dashboard/dashboard.component';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [provideRouter([
@@ -23,6 +24,6 @@ bootstrapApplication(AppComponent, {
     { path: 'forgot-password', loadComponent: () => import('./app/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
     { path: 'side-bar', loadComponent: () => import('./app/side-bar/side-bar.component').then(m => m.SideBarComponent) },
     { path: 'reset-password', loadComponent: () => import('./app/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
-  ])]
+  ]),provideHttpClient()],
 })
 .catch(err => console.error(err));

@@ -12,6 +12,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ReservationDetailComponent } from './reservation-detail/reservation-detail.component';
+import { CustomerManagementComponent } from './customer-management/customer-management.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'order-detail', component: OrderDetailComponent },
   { path: 'edit-product', component: EditProductComponent },
+  { path: 'reservation-detail', component: ReservationDetailComponent },
+  { path: 'customer-management', component: CustomerManagementComponent },
 ];
 
 @NgModule({
