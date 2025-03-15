@@ -1,15 +1,8 @@
-import { Component, Inject, LOCALE_ID, signal, computed } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router ,RouterModule } from '@angular/router';
-
-interface Customer {
-  id: string;
-  customerName: string;
-  email: string;
-  totalOrders: number;
-  phone: string;
-  selected: boolean;
-}
+import { CustomerInterface } from '../models/customer.model';
+import { CustomerService } from '../services/customer.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-customer-management',
@@ -18,55 +11,81 @@ interface Customer {
   templateUrl: './customer-management.component.html',
   styleUrls: ['./customer-management.component.css']
 })
-export class CustomerManagementComponent {
-  customers = signal<Customer[]>([
-    { id: 'C001', customerName: 'Nguyen Thi Mai', email: 'mai@example.com', totalOrders: 5, phone: '0912345678', selected: false },
-    { id: 'C002', customerName: 'Tran Minh Phuc', email: 'phuc@example.com', totalOrders: 3, phone: '0987654321', selected: false }
-  ]);
+export class CustomerManagementComponent implements OnInit {
+  customers: CustomerInterface[] = [];
+  searchQuery: string = '';
 
-  searchQuery = signal('');
+  constructor(private customerService: CustomerService, private cdr: ChangeDetectorRef) {}
 
-  constructor(
-    @Inject(LOCALE_ID) private locale: string,
-    private router: Router // Inject Router
-  ) {}
-
-  selectAllCustomers(event: any) {
-    const isChecked = event.target.checked;
-    this.customers.update(customers =>
-      customers.map(customer => ({ ...customer, selected: isChecked }))
-    );
+  ngOnInit(): void {
+    this.getCustomers();
   }
 
-  toggleCustomerSelection(customer: Customer) {
-    this.customers.update(customers =>
-      customers.map(c => c.id === customer.id ? { ...c, selected: !c.selected } : c)
-    );
+  getCustomers(): void {
+    this.customerService.getCustomers().subscribe({
+      next: (data) => {
+        // ⚠ Chuyển đổi tên thuộc tính để phù hợp với model
+        this.customers = data.map(customer => ({
+          Customer_ID: customer.Customer_ID,
+          Customer_Name: customer.Customer_Name,
+          Customer_Email: customer.Customer_Email,
+          Customer_Phone: customer.Customer_Phone,
+          selected: false, // Mặc định không chọn
+        }));
+
+        console.log('Customers loaded successfully:', this.customers);
+        this.cdr.detectChanges(); // Cập nhật giao diện ngay sau khi có dữ liệu
+      },
+      error: (err) => {
+        console.error('Failed to fetch customers:', err);
+      }
+    });
   }
 
-  deleteSelectedCustomers() {
-    this.customers.update(customers => customers.filter(customer => !customer.selected));
+  updateSearchQuery(event: Event): void {
+    this.searchQuery = (event.target as HTMLInputElement).value;
   }
 
-  deleteCustomer(customerId: string) {
-    this.customers.update(customers => customers.filter(customer => customer.id !== customerId));
+  searchCustomers(): void {
+    console.log('Search query:', this.searchQuery);
   }
 
-  editCustomer(customer: Customer) {
-    this.router.navigate(['/edit-customer', customer.id]);
-  }
-   
-
-  updateSearchQuery(event: any) {
-    this.searchQuery.set(event.target.value.toLowerCase());
+  selectAllCustomers(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    this.customers.forEach(customer => (customer.selected = checked));
   }
 
-  filteredCustomers = computed(() => {
-    return this.customers().filter(customer =>
-      customer.customerName.toLowerCase().includes(this.searchQuery()) ||
-      customer.email.toLowerCase().includes(this.searchQuery()) ||
-      customer.id.toLowerCase().includes(this.searchQuery()) ||
-      customer.phone.includes(this.searchQuery())
-    );
-  });
+  toggleCustomerSelection(customer: CustomerInterface): void {
+    customer.selected = !customer.selected;
+  }
+
+  editCustomer(customer: CustomerInterface): void {
+    console.log('Edit customer:', customer);
+  }
+
+  deleteCustomer(id: string): void {
+    this.customerService.deleteCustomer(id).subscribe({
+      next: () => {
+        this.customers = this.customers.filter(customer => customer.Customer_ID !== id);
+        console.log(`Customer ${id} deleted successfully`);
+      },
+      error: (err) => {
+        console.error(`Error deleting customer ${id}:`, err);
+      }
+    });
+  }
+
+  deleteSelectedCustomers(): void {
+    const selectedIds = this.customers.filter(c => c.selected).map(c => c.Customer_ID);
+    if (!selectedIds.length) {
+      console.warn('No customers selected for deletion.');
+      return;
+    }
+
+    selectedIds.forEach(id => {
+      this.deleteCustomer(id);
+    });
+
+    console.log(`Deleted ${selectedIds.length} customers.`);
+  }
 }
