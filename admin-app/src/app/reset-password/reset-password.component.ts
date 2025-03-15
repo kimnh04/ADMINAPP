@@ -12,24 +12,43 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class ResetPasswordComponent {
   resetPasswordForm: FormGroup;
-  
+  successMessage: string = ''; // Thông báo khi đổi mật khẩu thành công
+  errorMessage: string = '';   // Thông báo lỗi khi mật khẩu không trùng
+
   constructor(private fb: FormBuilder) {
     this.resetPasswordForm = this.fb.group({
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ['', [Validators.required]],
+    }, {
+      validators: this.passwordMatchValidator
     });
   }
-  
+  passwordMatchValidator(form: FormGroup) {
+    const newPassword = form.get('newPassword')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+
+    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+      return { passwordsDontMatch: true };
+    }
+    return null;
+  }
   onSubmit() {
     if (this.resetPasswordForm.valid) {
-      // Kiểm tra nếu mật khẩu và xác nhận mật khẩu khớp
-      if (this.resetPasswordForm.value.newPassword === this.resetPasswordForm.value.confirmPassword) {
-        console.log('Password changed successfully:', this.resetPasswordForm.value);
-        // Thêm logic đổi mật khẩu ở đây
-      } else {
-        console.log('Passwords do not match');
-        // Thêm thông báo lỗi nếu cần
-      }
+      console.log('Password changed successfully:', this.resetPasswordForm.value);
+      const newPassword = this.resetPasswordForm.value.newPassword;
+      localStorage.setItem('userPassword', newPassword); 
+      this.successMessage = 'Password changed successfully!';
+      this.errorMessage = '';
+    } else {
+      console.log('Passwords do not match');
+      this.errorMessage = 'Passwords do not match!';
+      this.successMessage = '';
     }
+  }
+  get newPassword() {
+    return this.resetPasswordForm.get('newPassword');
+  }
+  get confirmPassword() {
+    return this.resetPasswordForm.get('confirmPassword');
   }
 }

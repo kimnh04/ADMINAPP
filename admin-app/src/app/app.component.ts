@@ -4,46 +4,20 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { NgStyle } from '@angular/common'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [ HeaderComponent, RouterOutlet, NgClass, SideBarComponent] // Import các component
+  imports: [ HeaderComponent, RouterOutlet, NgClass, SideBarComponent, NgStyle] 
 })
 export class AppComponent {
   title="admin-app";
-  isSidebarOpen = true;
-
-  toggleSidebar(isOpen: boolean) {
-    this.isSidebarOpen = isOpen;
-  }
-  // constructor(public router: Router) {}
-
   constructor(private router: Router) {}
-
-  navigateToDashboard() {
-    this.router.navigate(['/dashboard']);
-  }
-
-  navigateToCustomer() {
-    this.router.navigate(['/customer-management']);
-  }
-
-  navigateToProduct() {
-    this.router.navigate(['/product-management']);
-  }
-
-  navigateToReservation() {
-    this.router.navigate(['/reservation-management']);
-  }
-
-  navigateToOrder() {
-    this.router.navigate(['/order-management']);
-  }
-
-  navigateToLogout() {
-    this.router.navigate(['/log-out']);
+  isLoginPage(): boolean {
+    console.log(this.router.url);  // Để kiểm tra giá trị của URL
+    return this.router.url === '/log-in'|| this.router.url === '/forgot-password'|| this.router.url === '/reset-password';
   }
 }

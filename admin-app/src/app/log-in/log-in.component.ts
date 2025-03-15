@@ -15,15 +15,13 @@ export class LogInComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
   successMessage: string | null = null;
-
-  // Tài khoản và mật khẩu cố định
-  private validEmail = 'reboundpiecring.official@gmail.com';
-  private validPassword = 'Reboundcingcing2025';
+  
+  private validEmail = 'reboundpiecring.official@gmail.com'; // Email cố định
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],  
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
       rememberPassword: [false],
     });
   }
@@ -31,16 +29,20 @@ export class LogInComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
+      
+      // Lấy mật khẩu đã lưu trong localStorage
+      const storedPassword = localStorage.getItem('userPassword');
 
-      if (email === this.validEmail && password === this.validPassword) {
-        // Đăng nhập thành công
+      // Kiểm tra email và mật khẩu nhập vào với dữ liệu từ localStorage
+      if (email === this.validEmail && password === storedPassword) {
         this.successMessage = 'Login successful!';
         this.errorMessage = null;
+        
+        // Điều hướng đến dashboard sau 1 giây
         setTimeout(() => {
           this.router.navigate(['dashboard']);
         }, 1500);
       } else {
-        // Nếu thông tin đăng nhập sai
         this.errorMessage = 'Please check your email or password again';
         this.successMessage = null;
       }

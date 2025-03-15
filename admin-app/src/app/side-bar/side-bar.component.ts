@@ -2,10 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-side-bar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, ],
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css'],
   encapsulation: ViewEncapsulation.None // Cho CSS global

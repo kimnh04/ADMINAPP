@@ -1,5 +1,6 @@
 import { Component, Inject, LOCALE_ID, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router ,RouterModule } from '@angular/router';
 
 interface Customer {
   id: string;
@@ -13,7 +14,7 @@ interface Customer {
 @Component({
   selector: 'app-customer-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './customer-management.component.html',
   styleUrls: ['./customer-management.component.css']
 })
@@ -25,7 +26,10 @@ export class CustomerManagementComponent {
 
   searchQuery = signal('');
 
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  constructor(
+    @Inject(LOCALE_ID) private locale: string,
+    private router: Router // Inject Router
+  ) {}
 
   selectAllCustomers(event: any) {
     const isChecked = event.target.checked;
@@ -49,8 +53,9 @@ export class CustomerManagementComponent {
   }
 
   editCustomer(customer: Customer) {
-    console.log('Editing customer:', customer);
+    this.router.navigate(['/edit-customer', customer.id]);
   }
+   
 
   updateSearchQuery(event: any) {
     this.searchQuery.set(event.target.value.toLowerCase());

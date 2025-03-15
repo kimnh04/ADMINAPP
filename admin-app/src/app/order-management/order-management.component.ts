@@ -71,8 +71,5 @@ export class OrderManagementComponent {
   formatPrice(price: number): string {
     return formatCurrency(price, this.locale, '', 'VND').replace('VND', '') + ' ₫';
   }
-
-  editOrder(order: Order) {
-    console.log('Editing order:', order);
-  }
+  
 }

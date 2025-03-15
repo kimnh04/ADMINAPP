@@ -14,7 +14,7 @@ export class LogOutComponent {
 
   // Khi nhấn Yes, điều hướng đến Login
   onYesClick() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/log-in']);
   }
 
   // Khi nhấn No, điều hướng đến Dashboard

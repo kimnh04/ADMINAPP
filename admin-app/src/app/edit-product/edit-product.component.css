@@ -3,6 +3,7 @@
     padding: 20px;
     border-radius: 10px;
     margin: auto;
+    
 }
 
 .form-container h1,
@@ -28,13 +29,14 @@ fieldset {
     border: 1px solid #D1CBB8;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    
 }
 
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #4D4D4D;
+    color: #595031;
 }
 
 input,
@@ -74,11 +76,13 @@ textarea {
 }
 
 .btn {
-    padding: 10px 20px;
+    height: 42px;
+    width: 137px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: bold;
+    font-size:15px;
     background-color: #DDD7C0;
     color: #595031;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -86,4 +90,9 @@ textarea {
 
 .btn:hover {
     background-color: #C5BFA7;
+}
+.info{
+    font-weight: bold;
+    color: #595031;
+    font-size: 20px;
 }

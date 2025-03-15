@@ -10,20 +10,23 @@ import { ProductManagementComponent } from './product-management/product-managem
 import { OrderManagementComponent } from './order-management/order-management.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 const routes: Routes = [
-  { path: 'log-in', component: LogInComponent },
+
   { path: 'log-out', component: LogOutComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, // Chặn nếu chưa đăng nhập
-  { path: '', redirectTo: '/log-in', pathMatch: 'full' }, // Mặc định về login
+  { path: 'log-in', component: LogInComponent },
+  { path: '', redirectTo: '/log-in', pathMatch: 'full' }, 
   { path: 'side-bar', component: SideBarComponent },
   { path: 'reservation-management', component: ReservationManagementComponent },
   { path: 'product-management', component: ProductManagementComponent },
   { path: 'order-management', component: OrderManagementComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
-
+  { path: 'order-detail', component: OrderDetailComponent },
+  { path: 'edit-product', component: EditProductComponent },
 ];
 
 @NgModule({

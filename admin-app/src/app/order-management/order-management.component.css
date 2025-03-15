@@ -47,6 +47,7 @@
      background: none;
      outline: none;
      cursor: pointer;
+     justify-content: space-around; 
  }
  
  /* Delete button styling */

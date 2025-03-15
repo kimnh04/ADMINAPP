@@ -34,7 +34,7 @@ label {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #4D4D4D;
+  color: #595031;
 }
 
 input,
@@ -74,11 +74,13 @@ textarea {
 }
 
 .btn {
-  padding: 10px 20px;
+  height: 42px;
+  width: 137px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: bold;
+  font-size:15px;
   background-color: #DDD7C0;
   color: #595031;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);

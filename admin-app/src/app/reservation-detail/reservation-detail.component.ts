@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';  // Import CommonModule
   styleUrls: ['./reservation-detail.component.css']
 })
 export class ReservationDetailComponent implements OnInit {
-  // Data mẫu
   reservation = {
     customerName: 'John Doe',
     phoneNumber: '0912345678',
@@ -29,9 +28,4 @@ export class ReservationDetailComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  goBack() {
-    // Logic quay lại trang trước (hoặc điều hướng đến trang khác)
-    console.log('Going back to the previous page...');
-  }
 }

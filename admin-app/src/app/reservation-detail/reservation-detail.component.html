@@ -2,16 +2,14 @@
     <h1>Reservation Details</h1>
 
     <fieldset>
-        <legend>Customer Information</legend>
+        <legend class="info">Customer Information</legend>
         <div class="row">
             <div class="col">
                 <label for="customerName">Customer Name</label>
-                <!-- Hiển thị Customer Name mà không có input -->
                 <p id="customerName">{{ reservation.customerName }}</p>
             </div>
             <div class="col">
                 <label for="phoneNumber">Phone Number</label>
-                <!-- Hiển thị Phone Number mà không có input -->
                 <p id="phoneNumber">{{ reservation.phoneNumber }}</p>
             </div>
         </div>
@@ -19,28 +17,24 @@
         <div class="row">
             <div class="col">
                 <label for="email">Email Address</label>
-                <!-- Hiển thị Email Address mà không có input -->
                 <p id="email">{{ reservation.email }}</p>
             </div>
             <div class="col">
                 <label for="dob">Date of Birth</label>
-                <!-- Hiển thị Date of Birth mà không có input -->
                 <p id="dob">{{ reservation.dob | date: 'yyyy-MM-dd' }}</p>
             </div>
         </div>
     </fieldset>
 
     <fieldset>
-        <legend>Reservation Details</legend>
+        <legend class="info">Reservation Details</legend>
         <div class="row">
             <div class="col">
                 <label for="appointmentDate">Appointment Date & Time</label>
-                <!-- Hiển thị Appointment Date & Time mà không có input -->
                 <p id="appointmentDate">{{ reservation.appointmentDate | date: 'yyyy-MM-dd HH:mm' }}</p>
             </div>
             <div class="col">
                 <label for="serviceType">Service Type</label>
-                <!-- Hiển thị Service Type mà không có option -->
                 <p id="serviceType">{{ reservation.serviceType }}</p>
             </div>
         </div>
@@ -48,22 +42,19 @@
         <div class="row">
             <div class="col">
                 <label for="reservationLocation">Rebound Branch</label>
-                <!-- Hiển thị Rebound Branch mà không có option -->
                 <p id="reservationLocation">{{ reservation.reservationLocation }}</p>
             </div>
             <div class="col">
                 <label for="jewelryType">Jewelry Type</label>
-                <!-- Hiển thị Jewelry Type mà không có option -->
                 <p id="jewelryType">{{ reservation.jewelryType }}</p>
             </div>
         </div>
 
         <label for="specialRequests">Special Requests/Notes</label>
-        <!-- Hiển thị Special Requests/Notes mà không có textarea -->
         <p id="specialRequests">{{ reservation.specialRequests }}</p>
     </fieldset>
 
     <div class="action-buttons">
-        <button class="btn" (click)="goBack()">Back</button>
+        <button class="btn" onclick="window.history.back()">Back</button>
     </div>
 </div>

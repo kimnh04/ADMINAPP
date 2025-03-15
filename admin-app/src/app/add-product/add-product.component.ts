@@ -31,7 +31,6 @@ export class AddProductComponent {
       this.product.price = input.value; // Cập nhật giá vào object
     }
   }
-
   goBack() {
     this.location.back();
   }
