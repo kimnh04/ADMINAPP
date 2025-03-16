@@ -14,10 +14,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditCustomerComponent {
   customer = {
-    email: 'thuynnd22411c@st.uel.edu.vn',
-    phoneNumber: '0123456789',
+    email: 'maivananh@email.com',
+    phoneNumber: '912345678',
     address: 'No. 11, Street No. 6, Quarter 13, Linh Xuan Ward, Thu Duc City, Vietnam',
-    status: 'Loyal customer',
+    status: 'Member',
     dob: '2004-01-01',
     description: '',
   };
